@@ -1,0 +1,145 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://addons/midi/MidiPlayer.gd" type="Script" id=1]
+[ext_resource path="res://test.gd" type="Script" id=2]
+[ext_resource path="res://bw circle.png" type="Texture" id=3]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 3 ) ],
+"loop": false,
+"name": "default",
+"speed": 5.0
+} ]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="GodotMIDIPlayer" type="Node" parent="."]
+script = ExtResource( 1 )
+file = "res://data/fairyland_gm.mid"
+volume_db = 0.0
+soundfont = "res://data/Aspirin-Stereo.sf2"
+sequence_per_seconds = 240
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_right = 458.0
+margin_bottom = 395.0
+color = Color( 0.298039, 0.0941176, 0.0941176, 1 )
+__meta__ = {
+"_editor_description_": ":"
+}
+
+[node name="Button" type="Button" parent="ColorRect"]
+margin_left = 208.0
+margin_top = 21.0
+margin_right = 247.0
+margin_bottom = 41.0
+text = "bell"
+
+[node name="Timer1" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[node name="Group1" type="VBoxContainer" parent="."]
+margin_left = 23.0
+margin_top = 114.0
+margin_right = 135.0
+margin_bottom = 277.0
+
+[node name="CheckBox0" type="CheckBox" parent="Group1"]
+margin_right = 114.0
+margin_bottom = 24.0
+rect_pivot_offset = Vector2( 57, 12 )
+text = "0: Cow Bell"
+
+[node name="CheckBox1" type="CheckBox" parent="Group1"]
+margin_top = 28.0
+margin_right = 114.0
+margin_bottom = 52.0
+rect_pivot_offset = Vector2( 57, 12 )
+text = "1: Snare"
+
+[node name="CheckBox2" type="CheckBox" parent="Group1"]
+margin_top = 56.0
+margin_right = 114.0
+margin_bottom = 80.0
+rect_pivot_offset = Vector2( 57, 12 )
+text = "2: Bass Drum"
+
+[node name="CheckBox3" type="CheckBox" parent="Group1"]
+margin_top = 84.0
+margin_right = 114.0
+margin_bottom = 108.0
+rect_pivot_offset = Vector2( 57, 12 )
+text = "3"
+
+[node name="CheckBox4" type="CheckBox" parent="Group1"]
+margin_top = 112.0
+margin_right = 114.0
+margin_bottom = 136.0
+rect_pivot_offset = Vector2( 57, 12 )
+text = "4"
+
+[node name="TextEdit1" type="TextEdit" parent="."]
+margin_left = 277.0
+margin_top = 116.0
+margin_right = 443.0
+margin_bottom = 277.0
+
+[node name="Button0" type="Button" parent="."]
+margin_left = 156.0
+margin_top = 118.0
+margin_right = 234.0
+margin_bottom = 138.0
+text = "Mute"
+
+[node name="Button1" type="Button" parent="."]
+margin_left = 155.0
+margin_top = 152.0
+margin_right = 233.0
+margin_bottom = 172.0
+text = "Pattern 1"
+
+[node name="Button2" type="Button" parent="."]
+margin_left = 155.0
+margin_top = 183.0
+margin_right = 233.0
+margin_bottom = 203.0
+text = "Pattern 2"
+
+[node name="Button3" type="Button" parent="."]
+margin_left = 155.0
+margin_top = 215.0
+margin_right = 233.0
+margin_bottom = 235.0
+text = "Pattern 3"
+
+[node name="Button4" type="Button" parent="."]
+margin_left = 155.0
+margin_top = 245.0
+margin_right = 233.0
+margin_bottom = 265.0
+text = "Pattern 4"
+
+[node name="Circle_bw" type="AnimatedSprite" parent="."]
+position = Vector2( 257, 128 )
+frames = SubResource( 1 )
+
+[connection signal="pressed" from="ColorRect/Button" to="." method="_on_Button_pressed"]
+[connection signal="timeout" from="Timer1" to="." method="_on_Timer1_timeout"]
+[connection signal="toggled" from="Group1/CheckBox0" to="." method="_on_radio_toggled" binds= [ 0 ]]
+[connection signal="toggled" from="Group1/CheckBox1" to="." method="_on_radio_toggled" binds= [ 1 ]]
+[connection signal="toggled" from="Group1/CheckBox2" to="." method="_on_radio_toggled" binds= [ 2 ]]
+[connection signal="toggled" from="Group1/CheckBox3" to="." method="_on_radio_toggled" binds= [ 3 ]]
+[connection signal="toggled" from="Group1/CheckBox4" to="." method="_on_radio_toggled" binds= [ 4 ]]
+[connection signal="mouse_entered" from="Button0" to="." method="_on_Button_mouse_entered" binds= [ 0 ]]
+[connection signal="mouse_exited" from="Button0" to="." method="_on_Button_0to4_mouse_exited"]
+[connection signal="mouse_entered" from="Button1" to="." method="_on_Button_mouse_entered" binds= [ 1 ]]
+[connection signal="mouse_exited" from="Button1" to="." method="_on_Button_0to4_mouse_exited"]
+[connection signal="mouse_entered" from="Button2" to="." method="_on_Button_mouse_entered" binds= [ 2 ]]
+[connection signal="mouse_exited" from="Button2" to="." method="_on_Button_0to4_mouse_exited"]
+[connection signal="mouse_entered" from="Button3" to="." method="_on_Button_mouse_entered" binds= [ 3 ]]
+[connection signal="mouse_exited" from="Button3" to="." method="_on_Button_0to4_mouse_exited"]
+[connection signal="mouse_entered" from="Button4" to="." method="_on_Button_mouse_entered" binds= [ 4 ]]
+[connection signal="mouse_exited" from="Button4" to="." method="_on_Button_0to4_mouse_exited"]

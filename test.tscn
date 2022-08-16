@@ -126,6 +126,29 @@ text = "Pattern 4"
 position = Vector2( 257, 128 )
 frames = SubResource( 1 )
 
+[node name="ButtonFaster" type="Button" parent="."]
+margin_left = 176.0
+margin_top = 339.0
+margin_right = 227.0
+margin_bottom = 359.0
+rect_pivot_offset = Vector2( 26, 10 )
+text = "Faster"
+
+[node name="ButtonSlower" type="Button" parent="."]
+margin_left = 102.0
+margin_top = 338.0
+margin_right = 153.0
+margin_bottom = 359.0
+rect_pivot_offset = Vector2( 26, 10 )
+text = "Slower"
+
+[node name="LabelTempo" type="Label" parent="."]
+margin_left = 250.0
+margin_top = 339.0
+margin_right = 290.0
+margin_bottom = 353.0
+text = "Tempo: bpm"
+
 [connection signal="pressed" from="ColorRect/Button" to="." method="_on_Button_pressed"]
 [connection signal="timeout" from="Timer1" to="." method="_on_Timer1_timeout"]
 [connection signal="toggled" from="Group1/CheckBox0" to="." method="_on_radio_toggled" binds= [ 0 ]]
@@ -143,3 +166,5 @@ frames = SubResource( 1 )
 [connection signal="mouse_exited" from="Button3" to="." method="_on_Button_0to4_mouse_exited"]
 [connection signal="mouse_entered" from="Button4" to="." method="_on_Button_mouse_entered" binds= [ 4 ]]
 [connection signal="mouse_exited" from="Button4" to="." method="_on_Button_0to4_mouse_exited"]
+[connection signal="pressed" from="ButtonFaster" to="." method="_on_ButtonFaster_pressed"]
+[connection signal="pressed" from="ButtonSlower" to="." method="_on_ButtonSlower_pressed"]

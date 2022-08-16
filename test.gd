@@ -21,7 +21,7 @@ var velocities = [36, 49, 58, 29, 42]
 #var snareBaseIndex : int = 0
 #var Snare =     [1,0,0,0,0,1,1,0,1,0,0,1,1,0,0,1,1,1,0,0,0,0,0,0]
 #var crashindex49: int = 0
-
+var tempo: float = 9.0
 var note_index: int = 0 #updated at the end of each timer interrupt, 0-31 for now
 var radio_station: int = 1
 var hover_station: int = -1
@@ -80,7 +80,8 @@ var triple_timer: int = 0
 	Initializes
 """
 func _ready( ):
-	t.set_wait_time(9.0/60.0)
+	$LabelTempo.text = "Tempo: " + String(1200/tempo)+ " bpm"
+	t.set_wait_time(tempo/60.0)
 	if $GodotMIDIPlayer.connect( "midi_event", self, "_on_midi_event" ) != OK:
 		print( "error" )
 		breakpoint
@@ -187,12 +188,12 @@ func _on_Timer1_timeout():
 		$TextEdit1.set_text(notes_str)
 	#print("ht: ", hover_station)
 	
-#	Play_step(midi_cowbell, pat_cb_ride, notes_cb_ride, 66)
-	Play_step(midi_ride, pat_cb_ride, notes_cb_ride, 127)
-#	Play_step(midi_h_tom, pat_h_tom, notes_h_tom, 18)
-#	Play_step(midi_l_tom, pat_l_tom, notes_l_tom, 18)
+	Play_step(midi_cowbell, pat_cb_ride, notes_cb_ride, 66)
+#	Play_step(midi_ride, pat_cb_ride, notes_cb_ride, 127)
+	Play_step(midi_h_tom, pat_h_tom, notes_h_tom, 18)
+	Play_step(midi_l_tom, pat_l_tom, notes_l_tom, 18)
 	Play_step(midi_snare, pat_my_snare, notes_my_snare, 64)
-	Play_step(midi_bass, pat_my_bass, notes_my_bass, 100)
+	Play_step(midi_bass, pat_my_bass, notes_my_bass, 90)
 	Play_step(midi_p_hihat, pat_c_hihat, notes_c_hihat, 127)
 	
 #	const midi_snare: int = 38
@@ -294,3 +295,12 @@ func _on_Button_mouse_entered(value):
 func _on_Button_0to4_mouse_exited():
 	hover_station = -1 #invalid 
 
+func _on_ButtonFaster_pressed():
+	tempo -= 1.0
+	t.set_wait_time(tempo/60.0)
+	$LabelTempo.text = "Tempo: " + String(1200/tempo)+ " bpm"
+
+func _on_ButtonSlower_pressed():
+	tempo += 1.0
+	t.set_wait_time(tempo/60.0)
+	$LabelTempo.text = "Tempo: " + String(1200/tempo)+ " bpm"

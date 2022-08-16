@@ -130,7 +130,7 @@ func Play_step(id_i, pat, notes, dy_max: int):
 		input.message = 0x9 # note on
 		input.pitch = id_instrument # note number 38,40
 		input.channel =  9#9 for drums
-		input.velocity = dynamics * (dy_max + 4)/8
+		input.velocity = dy_max * (dynamics + 1)/5
 		$GodotMIDIPlayer.receive_raw_midi_message( input )	
 
 func _on_Timer1_timeout():	
